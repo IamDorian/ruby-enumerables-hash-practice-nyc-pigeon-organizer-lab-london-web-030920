@@ -17,35 +17,49 @@ pigeon_data = {
   }
 }
 
-def nyc_pigeon_organizer(data)
-  # write your code here!
-  newHash = {}
-  data[:gender][:male].each { |e|
-  newHash[e] = Hash.new 
-    newHash[e][:color] = []
-    newHash[e][:gender] = []
-     newHash[e][:gender].push("male")
-    newHash[e][:lives] = []
-  }
-  data[:gender][:female].each { |e|
-  newHash[e] = Hash.new 
-    newHash[e][:color] = []
-    newHash[e][:gender] = []
-    newHash[e][:gender].push("female")
-    newHash[e][:lives] = []
-  }
+def nyc_pigeon_organizer (data)
+  final = {}
 
-
+  data.each do |first_level, all_other|
+    all_other.each do |category, array|
+      array.each do |name|
+        final[name] = {:color => [], :gender => [], :lives => []}
+      end 
+    end 
+  end 
+  x = final.keys
+  data[:color].each do |bird_color, name|
+    name.each do |bird_name|
+      x.each do |item|
+        if bird_name === item
+          final[item][:color] << bird_color.to_s
+        end 
+      end 
+    end 
+  end 
+  data[:gender].each do |gender, type|
+    type.each do |bird_name|
+      x.each do |item|
+        if bird_name === item
+          final[item][:gender] << gender.to_s
+        end 
+      end 
+    end 
+  end 
+  data[:lives].each do |location, name|
+    name.each do |bird_name|
+      x.each do |item|
+        if bird_name === item
+          final[item][:lives] << location
+        end 
+      end 
+    end 
+  end 
   
-   
-  
-  puts newHash
-end
+  return final 
+end 
 
 nyc_pigeon_organizer(pigeon_data)
-
-
-
 
 
 
