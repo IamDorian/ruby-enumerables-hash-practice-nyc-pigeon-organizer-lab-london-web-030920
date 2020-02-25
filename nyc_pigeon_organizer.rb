@@ -38,7 +38,7 @@ def nyc_pigeon_organizer(data)
 
   
    
-  }
+  
   puts newHash
 end
 
